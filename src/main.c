@@ -51,6 +51,7 @@ void cadastrarMedico(Medico **lista);
 void listarMedicos(Medico *lista);
 void agendarConsulta(Consulta **lista);
 void listarConsultas(Consulta *lista);
+void liberarMemoria(Fila **inicioFila, Paciente **listaPacientes, Medico **listaMedicos, Consulta **listaConsultas);
 
 // Funções
 void exibirMenu() {
@@ -72,7 +73,17 @@ void exibirMenu() {
 }
 
 void adicionarPacienteFilaPrioridade(Fila **inicio, Fila **fim, int idPaciente, int prioridade) {
+    if (prioridade < 0 || prioridade > 2) {
+        printf(RED "Erro: Prioridade inválida! Use 0 (Verde), 1 (Amarelo) ou 2 (Vermelho).\n" RESET);
+        return;
+    }
+
     Fila *novo = (Fila *)malloc(sizeof(Fila));
+    if (!novo) {
+        printf(RED "Erro: Falha na alocação de memória.\n" RESET);
+        return;
+    }
+
     novo->idPaciente = idPaciente;
     novo->prioridade = prioridade;
     novo->proximo = NULL;
@@ -90,7 +101,7 @@ void adicionarPacienteFilaPrioridade(Fila **inicio, Fila **fim, int idPaciente, 
         atual->proximo = novo;
         if (!novo->proximo) *fim = novo;
     }
-    printf(GREEN "Paciente adicionado à fila!\n" RESET);
+    printf(GREEN "Paciente adicionado à fila com sucesso!\n" RESET);
 }
 
 void atenderPacienteFilaPrioridade(Fila **inicio, Fila **fim) {
@@ -123,8 +134,17 @@ void listarFilaPrioridade(Fila *inicio) {
 
 void cadastrarPaciente(Paciente **lista) {
     Paciente *novo = (Paciente *)malloc(sizeof(Paciente));
+    if (!novo) {
+        printf(RED "Erro: Falha na alocação de memória.\n" RESET);
+        return;
+    }
+
     printf("Digite o ID do paciente: ");
-    scanf("%d", &novo->id);
+    if (scanf("%d", &novo->id) != 1) {
+        printf(RED "Erro: Entrada inválida para ID.\n" RESET);
+        free(novo);
+        return;
+    }
     printf("Digite o nome do paciente: ");
     scanf(" %[^\n]", novo->nome);
 
@@ -149,8 +169,17 @@ void listarPacientes(Paciente *lista) {
 
 void cadastrarMedico(Medico **lista) {
     Medico *novo = (Medico *)malloc(sizeof(Medico));
+    if (!novo) {
+        printf(RED "Erro: Falha na alocação de memória.\n" RESET);
+        return;
+    }
+
     printf("Digite o ID do médico: ");
-    scanf("%d", &novo->id);
+    if (scanf("%d", &novo->id) != 1) {
+        printf(RED "Erro: Entrada inválida para ID.\n" RESET);
+        free(novo);
+        return;
+    }
     printf("Digite o nome do médico: ");
     scanf(" %[^\n]", novo->nome);
     printf("Digite a especialidade do médico: ");
@@ -177,16 +206,33 @@ void listarMedicos(Medico *lista) {
 
 void agendarConsulta(Consulta **lista) {
     Consulta *nova = (Consulta *)malloc(sizeof(Consulta));
+    if (!nova) {
+        printf(RED "Erro: Falha na alocação de memória.\n" RESET);
+        return;
+    }
+
     printf("Digite o ID da consulta: ");
-    scanf("%d", &nova->id);
+    if (scanf("%d", &nova->id) != 1) {
+        printf(RED "Erro: Entrada inválida para ID.\n" RESET);
+        free(nova);
+        return;
+    }
     printf("Digite a data (DD/MM/AAAA): ");
     scanf(" %[^\n]", nova->data);
     printf("Digite o horário (HH:MM): ");
     scanf(" %[^\n]", nova->hora);
     printf("Digite o ID do paciente: ");
-    scanf("%d", &nova->idPaciente);
+    if (scanf("%d", &nova->idPaciente) != 1) {
+        printf(RED "Erro: Entrada inválida para ID do paciente.\n" RESET);
+        free(nova);
+        return;
+    }
     printf("Digite o ID do médico: ");
-    scanf("%d", &nova->idMedico);
+    if (scanf("%d", &nova->idMedico) != 1) {
+        printf(RED "Erro: Entrada inválida para ID do médico.\n" RESET);
+        free(nova);
+        return;
+    }
 
     nova->proxima = *lista;
     *lista = nova;
@@ -208,6 +254,38 @@ void listarConsultas(Consulta *lista) {
     }
 }
 
+void liberarMemoria(Fila **inicioFila, Paciente **listaPacientes, Medico **listaMedicos, Consulta **listaConsultas) {
+    Fila *filaAtual = *inicioFila;
+    while (filaAtual) {
+        Fila *prox = filaAtual->proximo;
+        free(filaAtual);
+        filaAtual = prox;
+    }
+
+    Paciente *pacienteAtual = *listaPacientes;
+    while (pacienteAtual) {
+        Paciente *prox = pacienteAtual->proximo;
+        free(pacienteAtual);
+        pacienteAtual = prox;
+    }
+
+    Medico *medicoAtual = *listaMedicos;
+    while (medicoAtual) {
+        Medico *prox = medicoAtual->proximo;
+        free(medicoAtual);
+        medicoAtual = prox;
+    }
+
+    Consulta *consultaAtual = *listaConsultas;
+    while (consultaAtual) {
+        Consulta *prox = consultaAtual->proxima;
+        free(consultaAtual);
+        consultaAtual = prox;
+    }
+
+    printf(GREEN "Memória liberada com sucesso.\n" RESET);
+}
+
 int main() {
     setlocale(LC_ALL, "pt_BR.UTF-8");
     SetConsoleOutputCP(CP_UTF8);
@@ -220,15 +298,27 @@ int main() {
     int opcao;
     do {
         exibirMenu();
-        scanf("%d", &opcao);
+        if (scanf("%d", &opcao) != 1) {
+            printf(RED "Erro: Entrada inválida. Digite um número.\n" RESET);
+            while (getchar() != '\n'); // Limpa o buffer de entrada
+            continue;
+        }
 
         switch (opcao) {
             case 1: {
                 int idPaciente, prioridade;
                 printf("Digite o ID do paciente: ");
-                scanf("%d", &idPaciente);
+                if (scanf("%d", &idPaciente) != 1) {
+                    printf(RED "Erro: Entrada inválida para ID.\n" RESET);
+                    while (getchar() != '\n');
+                    break;
+                }
                 printf("Digite a prioridade (0 = Verde, 1 = Amarelo, 2 = Vermelho): ");
-                scanf("%d", &prioridade);
+                if (scanf("%d", &prioridade) != 1) {
+                    printf(RED "Erro: Entrada inválida para prioridade.\n" RESET);
+                    while (getchar() != '\n');
+                    break;
+                }
                 adicionarPacienteFilaPrioridade(&inicioFila, &fimFila, idPaciente, prioridade);
                 break;
             }
@@ -257,10 +347,11 @@ int main() {
                 listarConsultas(listaConsultas);
                 break;
             case 0:
-                printf(RED "Saindo...\n" RESET);
+                printf(GREEN "Saindo do sistema...\n" RESET);
+                liberarMemoria(&inicioFila, &listaPacientes, &listaMedicos, &listaConsultas);
                 break;
             default:
-                printf(RED "Opção inválida!\n" RESET);
+                printf(RED "Opção inválida! Digite um número de 0 a 9.\n" RESET);
         }
     } while (opcao != 0);
 
