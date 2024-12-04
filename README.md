@@ -8,7 +8,7 @@ Este relatório apresenta o desenvolvimento de um Sistema de Atendimento e Geren
 
 
 
-Palavras-chave: **Agendamento**, **Filas**, *Prontuários*, **Linguagem** **C**, **Clínicas** **Médicas**
+Palavras-chave: **Agendamento**, **Filas**,  **Linguagem** **C**, **Clínicas** **Médicas**
 
 ## 🏥 Seção I - Introdução
 O **Sistema de Atendimento e Gerenciamento de Consultas para Clínica Médica** é uma solução desenvolvida para facilitar o gerenciamento de consultas médicas e a organização do atendimento em clínicas de médio e pequeno porte. Com o aumento da demanda por atendimentos e a necessidade de otimizar processos administrativos, clínicas enfrentam desafios como a gestão eficiente das consultas, controle de prontuários, agendamento de pacientes e administração de filas de espera. Esse projeto visa criar um sistema que simplifique esses processos, tornando o atendimento mais ágil e organizado.
