@@ -3,10 +3,59 @@
 - 202201634 - Henryque Oliveira Affiune
 - 202206136 - Rhadyja Almeida Barbosa
 
+   ##Resumo:
+Este relatório apresenta o desenvolvimento de um Sistema de Atendimento e Gerenciamento de Consultas para clínicas médicas de médio e pequeno porte. A proposta visa otimizar a gestão de agendamentos, prontuários e filas de espera, utilizando estruturas de dados e algoritmos eficientes implementados em linguagem C. A solução busca proporcionar um fluxo de trabalho mais ágil, organizado e menos suscetível a erros, beneficiando pacientes, recepcionistas e médicos.
+
+
+
+Palavras-chave: **Agendamento**, **Filas**, *Prontuários*, **Linguagem** **C**, **Clínicas** **Médicas**
+
 ## 🏥 Seção I - Introdução
 O **Sistema de Atendimento e Gerenciamento de Consultas para Clínica Médica** é uma solução desenvolvida para facilitar o gerenciamento de consultas médicas e a organização do atendimento em clínicas de médio e pequeno porte. Com o aumento da demanda por atendimentos e a necessidade de otimizar processos administrativos, clínicas enfrentam desafios como a gestão eficiente das consultas, controle de prontuários, agendamento de pacientes e administração de filas de espera. Esse projeto visa criar um sistema que simplifique esses processos, tornando o atendimento mais ágil e organizado.
 
 A implementação do **Sistema de Atendimento e Gerenciamento de Consultas** beneficia recepcionistas, médicos e pacientes, proporcionando uma interface intuitiva e funcionalidades que agilizam o fluxo de trabalho, desde o agendamento até o atendimento final.
+
+
+**Literatura**
+
+
+
+"Estruturas de Dados e Algoritmos em C" (Goodrich, M. & Tamassia, R.)
+Este livro descreve técnicas de implementação de filas, listas encadeadas e tabelas hash, essenciais para a organização de dados em sistemas computacionais.
+
+
+**Artigo**: "Sistemas de Gestão em Clínicas de Saúde" (Revista Gestão e Saúde)
+Aponta que a informatização de clínicas reduz significativamente os erros administrativos e melhora a experiência do paciente.
+
+
+**Vídeo**: "Como Implementar um Sistema de Agendamento com C" (Canal YouTube: Coding Clinics)
+Demonstra como criar funções de agendamento em C utilizando estruturas de dados otimizadas.
+
+
+**Dataset**
+Os dados explorados neste projeto incluem:
+Pacientes: Nome e prioridade 
+
+
+Médicos: Nome e  especialidade
+
+Consultas:Pacientes e médicos.
+
+**Desenvolvimento de algoritmos para gerenciamento de filas de atendimento .
+Uso de estruturas de dados como listas encadeadas e tabelas hash para otimizar a recuperação e armazenamento de informações.**
+
+**Avaliação**:
+
+
+Os resultados serão avaliados por:
+
+
+**Métricas de tempo**: Tempo médio de recuperação de dados e organização de filas.
+**Taxa de sucesso**: Percentual de consultas agendadas e reprogramadas com sucesso.
+**Benchmarks**: Comparação do desempenho do sistema com soluções similares disponíveis.
+
+
+
 
 ## 📚 Seção II - Fundamentos Teóricos
 O **Sistema de Atendimento e Gerenciamento de Consultas** será desenvolvido com base em conceitos fundamentais de estrutura de dados e algoritmos, aplicando a linguagem C para garantir desempenho e controle de memória durante a execução das operações. Este sistema utiliza técnicas e estruturas eficientes para organizar informações e garantir assim uma experiência fluida para os usuários. Abaixo, descrevemos as principais técnicas e estruturas aplicadas no sistema:
@@ -56,3 +105,9 @@ O **Sistema de Atendimento e Gerenciamento de Consultas para Clínica Médica** 
 
 ### 🏆 Conclusão
 O **Sistema de Atendimento e Gerenciamento de Consultas para Clínica Médica** apresenta-se como uma ferramenta robusta e de fácil uso, possibilitando a administração eficaz das consultas e o controle de prontuários e filas de espera em clínicas. Através de estruturas de dados otimizadas, o sistema permite a rápida recuperação de informações, tornando o atendimento mais rápido e organizado, e beneficiando tanto os profissionais da clínica quanto os pacientes.
+
+
+**Referências**
+Goodrich, M. & Tamassia, R. Estruturas de Dados e Algoritmos em C. Pearson, 2015.
+"Sistemas de Gestão em Clínicas de Saúde". Revista Gestão e Saúde, 2021.
+Coding Clinics. "Como Implementar um Sistema de Agendamento com C". YouTube, 2023.
