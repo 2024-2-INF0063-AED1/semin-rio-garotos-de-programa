@@ -34,6 +34,10 @@ Demonstra como criar funções de agendamento em C utilizando estruturas de dado
 
 **Dataset**
 Os dados explorados neste projeto incluem:
+
+
+
+
 Pacientes: Nome e prioridade 
 
 
